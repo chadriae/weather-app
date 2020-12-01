@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="style.css" rel="stylesheet">
+    <!-- <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    -->
+    <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
     <title>Weather App</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container border text-center">
         <div class="js-weather-form">
-            <label for="city">Weather forecast</label>
-            <input type="text" class="city" name="city" placeholder="Enter Location">
+            <label for="city"><h1>Weather forecast</h1></label>
+            <input type="text" class="city" name="city" placeholder="Enter Location 🔍">
             <input type="submit" value="Get forecast" id="run">
         </div>
         <div class="location">Current weather forecast for ...</div>
