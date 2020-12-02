@@ -3,6 +3,7 @@
 // TODO better fonts
 // TODO animation
 // TODO line graph chart.js
+// TODO live clock
 
 const currentCity = document.querySelector(".city");
 const cityLocation = document.querySelector(".location");
@@ -47,9 +48,6 @@ displayClock = () => {
     setTimeout(displayClock, 1000); 
 }
 
-displayClock();
-
-
 // Function to change HTML with current city
 cityHTML = (currentCity) => {
         cityLocation.innerHTML = `${currentCity}`;
@@ -71,6 +69,7 @@ showTemperature = (currentCity) => {
     fetch (`https://api.weatherbit.io/v2.0/forecast/daily?city=${currentCity}&key=cbe1db44a04a412ebe4a95a03cba00cd&days=${daysCount}`)
     .then(response => response.json())
     .then(data => {
+        console.log(data);
         let tempDayZero = data["data"]["0"]["temp"];
         let tempDayOne = data["data"]["1"]["temp"];
         let tempDayTwo = data["data"]["2"]["temp"];
@@ -81,12 +80,17 @@ showTemperature = (currentCity) => {
         let img2Src = data["data"]["2"]["weather"]["icon"];
         let img3Src = data["data"]["3"]["weather"]["icon"];
         let img4Src = data["data"]["4"]["weather"]["icon"];
-        cityImgTemp0.innerHTML = `<img src="https://www.weatherbit.io/static/img/icons/${img0Src}.png">`;
+        let descr0 = data["data"]["0"]["weather"]["description"];
+        let descr1 = data["data"]["1"]["weather"]["description"];
+        let descr2 = data["data"]["2"]["weather"]["description"];
+        let descr3 = data["data"]["3"]["weather"]["description"];
+        let descr4 = data["data"]["4"]["weather"]["description"];
+        cityImgTemp0.innerHTML = `<img src="https://www.weatherbit.io/static/img/icons/${img0Src}.png">${descr0}`;
         cityTemperatureDayZero.innerHTML = `${tempDayZero}°C`;
-        cityTemperatureDayOne.innerHTML = `Tomorrow<br>${tempDayOne}°C <img src="https://www.weatherbit.io/static/img/icons/${img1Src}.png">`;
-        cityTemperatureDayTwo.innerHTML = `${dayWeek[weekDay + 1]}<br>${tempDayTwo}°C <img src="https://www.weatherbit.io/static/img/icons/${img2Src}.png">`;
-        cityTemperatureDayThree.innerHTML = `${dayWeek[weekDay + 2]}<br>${tempDayThree}°C <img src="https://www.weatherbit.io/static/img/icons/${img3Src}.png">`;
-        cityTemperatureDayFour.innerHTML = `${dayWeek[weekDay + 3]}<br>${tempDayFour}°C <img src="https://www.weatherbit.io/static/img/icons/${img4Src}.png">`;
+        cityTemperatureDayOne.innerHTML = `Tomorrow<br>${tempDayOne}°C <img src="https://www.weatherbit.io/static/img/icons/${img1Src}.png">${descr1}`;
+        cityTemperatureDayTwo.innerHTML = `${dayWeek[weekDay + 1]}<br>${tempDayTwo}°C <img src="https://www.weatherbit.io/static/img/icons/${img2Src}.png">${descr2}`;
+        cityTemperatureDayThree.innerHTML = `${dayWeek[weekDay + 2]}<br>${tempDayThree}°C <img src="https://www.weatherbit.io/static/img/icons/${img3Src}.png">${descr3}`;
+        cityTemperatureDayFour.innerHTML = `${dayWeek[weekDay + 3]}<br>${tempDayFour}°C <img src="https://www.weatherbit.io/static/img/icons/${img4Src}.png">${descr4}`;
         // imgTemp0.src = "https://www.weatherbit.io/static/img/icons/c02d.png";
         // imgTemp1.src = "https://www.weatherbit.io/static/img/icons/c02d.png";
         // imgTemp2.src = "https://www.weatherbit.io/static/img/icons/c02d.png";
@@ -119,6 +123,7 @@ window.addEventListener("load", function() {
         })
     }
     getLocation();
+    displayClock();
 })
 
 // Executions after click or enter
@@ -126,6 +131,5 @@ document.querySelector("#run").addEventListener("click", function() {
     cityHTML(currentCity.value);
     changeBackground(currentCity.value);
     showTemperature(currentCity.value);
+    displayClock();
 }) 
-
-
