@@ -3,27 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    -->
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
     <title>Weather App</title>
 </head>
-<body>
+<body class="body">
     <div class="container border text-center">
+        <div class="location"></div>
+        <div class="date"></div>
+        <div id="temperatureDayZero"><img id="temp0" src=""></div>
         <div class="js-weather-form">
-            <label for="city"><h1>Weather forecast</h1></label>
-            <input type="text" class="city" name="city" placeholder="Enter Location 🔍">
+            <input type="text" class="city" name="city" placeholder="Enter Location 🔍"><br>
             <input type="submit" value="Get forecast" id="run">
         </div>
-        <div class="location">Current weather forecast for ...</div>
-        <div class="temperatureDayZero">The temperature is ...</div>
-        <div class="temperatureDayOne">The temperature for tomorrow is ...</div>
-        <div class="temperatureDayTwo">The temperature for ... is ...</div>
-        <div class="temperatureDayThree">The temperature for ... is ...</div>
-        <div class="temperatureDayFour">The temperature for ... is ...</div>
-
-        <div class="details"></div>
+        <div class="temps grid grid-cols-4">
+            <div id="temperatureDayOne" class="border-black"></div>
+            <div id="temperatureDayTwo" class="border-black"></div>
+            <div id="temperatureDayThree" class="border-black"></div>
+            <div id="temperatureDayFour" class="border-black"></div>
+        </div>
     </div>  
 </body>
 </html>
