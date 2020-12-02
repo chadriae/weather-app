@@ -1,5 +1,12 @@
+// TODO show last searches form
+// TODO make responsive
+// TODO better fonts
+// TODO animation
+// TODO line graph chart.js
+
 const currentCity = document.querySelector(".city");
 const cityLocation = document.querySelector(".location");
+const cityImgTemp0 = document.querySelector(".imgTemp0");
 const cityTemperatureDayZero = document.querySelector("#temperatureDayZero");
 const cityTemperatureDayOne = document.querySelector("#temperatureDayOne");
 const cityTemperatureDayTwo = document.querySelector("#temperatureDayTwo");
@@ -11,6 +18,7 @@ const imgTemp1 = document.querySelector("#temp1");
 const imgTemp2 = document.querySelector("#temp2");
 const imgTemp3 = document.querySelector("#temp3");
 const imgTemp4 = document.querySelector("#temp4");
+const timeNow = document.querySelector(".timeNow");
 
 const daysCount = 5;
 
@@ -30,12 +38,21 @@ const dateYear = date.getFullYear();
 const weekDay = date.getDay();
 const dayWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-console.log(dateMonth);
-document.querySelector(".date").innerHTML = `Today is ${dayWeek[weekDay - 1]} ${months[dateMonth - 1]} ${dateDay} ${dateYear}.`
+document.querySelector(".date").innerHTML = `${dayWeek[weekDay - 1]}<br>${months[dateMonth - 1]} ${dateDay}<br>${dateYear}`
+
+// Live clock
+displayClock = () => {
+    let display = date.toLocaleTimeString();
+    timeNow.innerHTML = display;
+    setTimeout(displayClock, 1000); 
+}
+
+displayClock();
+
 
 // Function to change HTML with current city
 cityHTML = (currentCity) => {
-    cityLocation.innerHTML = `${currentCity}`;
+        cityLocation.innerHTML = `${currentCity}`;
 }
 
 // Function to change background according to city
@@ -54,6 +71,7 @@ showTemperature = (currentCity) => {
     fetch (`https://api.weatherbit.io/v2.0/forecast/daily?city=${currentCity}&key=cbe1db44a04a412ebe4a95a03cba00cd&days=${daysCount}`)
     .then(response => response.json())
     .then(data => {
+        console.log(data);
         let tempDayZero = data["data"]["0"]["temp"];
         let tempDayOne = data["data"]["1"]["temp"];
         let tempDayTwo = data["data"]["2"]["temp"];
@@ -64,11 +82,12 @@ showTemperature = (currentCity) => {
         let img2Src = data["data"]["2"]["weather"]["icon"];
         let img3Src = data["data"]["3"]["weather"]["icon"];
         let img4Src = data["data"]["4"]["weather"]["icon"];
-        cityTemperatureDayZero.innerHTML = `${tempDayZero}°C <img src="https://www.weatherbit.io/static/img/icons/${img0Src}.png">`;
-        cityTemperatureDayOne.innerHTML = `Tomorrow<br>${tempDayOne}°C. <img src="https://www.weatherbit.io/static/img/icons/${img1Src}.png">`;
-        cityTemperatureDayTwo.innerHTML = `${dayWeek[weekDay + 1]}<br>${tempDayTwo}°C. <img src="https://www.weatherbit.io/static/img/icons/${img2Src}.png">`;
-        cityTemperatureDayThree.innerHTML = `${dayWeek[weekDay + 2]}<br>${tempDayThree}°C. <img src="https://www.weatherbit.io/static/img/icons/${img3Src}.png">`;
-        cityTemperatureDayFour.innerHTML = `${dayWeek[weekDay + 3]}<br>${tempDayFour}°C. <img src="https://www.weatherbit.io/static/img/icons/${img4Src}.png">`;
+        cityImgTemp0.innerHTML = `<img src="https://www.weatherbit.io/static/img/icons/${img0Src}.png">`;
+        cityTemperatureDayZero.innerHTML = `${tempDayZero}°C`;
+        cityTemperatureDayOne.innerHTML = `Tomorrow<br>${tempDayOne}°C <img src="https://www.weatherbit.io/static/img/icons/${img1Src}.png">`;
+        cityTemperatureDayTwo.innerHTML = `${dayWeek[weekDay + 1]}<br>${tempDayTwo}°C <img src="https://www.weatherbit.io/static/img/icons/${img2Src}.png">`;
+        cityTemperatureDayThree.innerHTML = `${dayWeek[weekDay + 2]}<br>${tempDayThree}°C <img src="https://www.weatherbit.io/static/img/icons/${img3Src}.png">`;
+        cityTemperatureDayFour.innerHTML = `${dayWeek[weekDay + 3]}<br>${tempDayFour}°C <img src="https://www.weatherbit.io/static/img/icons/${img4Src}.png">`;
         // imgTemp0.src = "https://www.weatherbit.io/static/img/icons/c02d.png";
         // imgTemp1.src = "https://www.weatherbit.io/static/img/icons/c02d.png";
         // imgTemp2.src = "https://www.weatherbit.io/static/img/icons/c02d.png";
@@ -79,34 +98,39 @@ showTemperature = (currentCity) => {
 }
 
 // Executions for location of user
-window.addEventListener("load", function() {
-    getLocation = () => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-            cityCoordinates.innerHTML = "Geolocation is not supported by this browser.";
-        }
-    }
+// window.addEventListener("load", function() {
+//     getLocation = () => {
+//         if (navigator.geolocation) {
+//             navigator.geolocation.getCurrentPosition(showPosition);
+//         } else {
+//             cityCoordinates.innerHTML = "Geolocation is not supported by this browser.";
+//         }
+//     }
 
-    showPosition = (position) => {
-        // Show place name based on coordinates
-        fetch (`https://api.opencagedata.com/geocode/v1/json?q=${position.coords.latitude}+${position.coords.longitude}&key=0dc9b14ba9a846f19428714fed4f54cc`)
-            .then(response => response.json())
-            .then(data => {
-            let currentCity = data["results"]["0"]["components"]["city"];
-            cityHTML(currentCity);
-            changeBackground(currentCity);
-            showTemperature(currentCity);
-        })
-    }
-    getLocation();
-})
+//     showPosition = (position) => {
+//         // Show place name based on coordinates
+//         fetch (`https://api.opencagedata.com/geocode/v1/json?q=${position.coords.latitude}+${position.coords.longitude}&key=0dc9b14ba9a846f19428714fed4f54cc`)
+//             .then(response => response.json())
+//             .then(data => {
+//             console.log(data);
+//             let currentCity = data["results"]["0"]["components"]["city"];
+//             let currentCountry = data["results"]["0"]["components"]["country"];
+//             cityHTML(currentCity, currentCountry);
+//             changeBackground(currentCity);
+//             showTemperature(currentCity);
+//         })
+//     }
+//     getLocation();
+// })
 
 // Executions after click or enter
-document.querySelector("#run").addEventListener("click", function() {
-    cityHTML(currentCity.value);
-    changeBackground(currentCity.value);
-    showTemperature(currentCity.value);
-}) 
+// document.querySelector("#run").addEventListener("click", function() {
+//     cityHTML(currentCity.value);
+//     changeBackground(currentCity.value);
+//     showTemperature(currentCity.value);
+// }) 
+    cityHTML("Paris");
+    changeBackground("Paris");
+    showTemperature("Paris");
 
 

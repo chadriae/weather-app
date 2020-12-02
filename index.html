@@ -9,19 +9,23 @@
     <title>Weather App</title>
 </head>
 <body class="body">
-    <div class="container border text-center">
-        <div class="location"></div>
-        <div class="date"></div>
-        <div id="temperatureDayZero"><img id="temp0" src=""></div>
-        <div class="js-weather-form">
-            <input type="text" class="city" name="city" placeholder="Enter Location 🔍"><br>
-            <input type="submit" value="Get forecast" id="run">
+    <div class="container text-center">
+        <div class="grid grid-cols-3 p-2 gap-4">
+            <div class="location text-left text-7xl"></div>
+            <div class="imgTemp0 row-span-2"></div>
+            <div class="date text-right"></div>
+            <div class="text-left text-4xl" id="temperatureDayZero"></div>
+            <div class="text-right text-4xl timeNow"></div>
         </div>
-        <div class="temps grid grid-cols-4">
-            <div id="temperatureDayOne" class="border-black"></div>
-            <div id="temperatureDayTwo" class="border-black"></div>
-            <div id="temperatureDayThree" class="border-black"></div>
-            <div id="temperatureDayFour" class="border-black"></div>
+        <div class="js-weather-form">
+            <input type="text" class="city p-2" name="city" placeholder="Enter Location 🔍">
+            <input class="bg-blue-400 p-2 rounded-full py-3 px-6 text-white" type="submit" value="Get forecast" id="run">
+        </div>
+        <div class="grid grid-cols-4 pt-4 gap-4">
+            <div id="temperatureDayOne" class="p-2 border rounded"></div>
+            <div id="temperatureDayTwo" class="p-2 border rounded"></div>
+            <div id="temperatureDayThree" class="p-2 border rounded"></div>
+            <div id="temperatureDayFour" class="p-2 border rounded"></div>
         </div>
     </div>  
 </body>
