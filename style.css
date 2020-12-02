@@ -21,7 +21,9 @@ body {
   text-align: center;
   padding: 10px;
   background-color: rgba(255, 255, 255, 0.8);
-  max-width: 60vh;
+  min-width: 40vh;
+  max-width: 80vh;
+  min-height: 100%;
 }
 
 img {

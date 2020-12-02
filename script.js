@@ -71,7 +71,6 @@ showTemperature = (currentCity) => {
     fetch (`https://api.weatherbit.io/v2.0/forecast/daily?city=${currentCity}&key=cbe1db44a04a412ebe4a95a03cba00cd&days=${daysCount}`)
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         let tempDayZero = data["data"]["0"]["temp"];
         let tempDayOne = data["data"]["1"]["temp"];
         let tempDayTwo = data["data"]["2"]["temp"];
@@ -98,39 +97,35 @@ showTemperature = (currentCity) => {
 }
 
 // Executions for location of user
-// window.addEventListener("load", function() {
-//     getLocation = () => {
-//         if (navigator.geolocation) {
-//             navigator.geolocation.getCurrentPosition(showPosition);
-//         } else {
-//             cityCoordinates.innerHTML = "Geolocation is not supported by this browser.";
-//         }
-//     }
+window.addEventListener("load", function() {
+    getLocation = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            cityCoordinates.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
 
-//     showPosition = (position) => {
-//         // Show place name based on coordinates
-//         fetch (`https://api.opencagedata.com/geocode/v1/json?q=${position.coords.latitude}+${position.coords.longitude}&key=0dc9b14ba9a846f19428714fed4f54cc`)
-//             .then(response => response.json())
-//             .then(data => {
-//             console.log(data);
-//             let currentCity = data["results"]["0"]["components"]["city"];
-//             let currentCountry = data["results"]["0"]["components"]["country"];
-//             cityHTML(currentCity, currentCountry);
-//             changeBackground(currentCity);
-//             showTemperature(currentCity);
-//         })
-//     }
-//     getLocation();
-// })
+    showPosition = (position) => {
+        // Show place name based on coordinates
+        fetch (`https://api.opencagedata.com/geocode/v1/json?q=${position.coords.latitude}+${position.coords.longitude}&key=0dc9b14ba9a846f19428714fed4f54cc`)
+            .then(response => response.json())
+            .then(data => {
+            let currentCity = data["results"]["0"]["components"]["city"];
+            let currentCountry = data["results"]["0"]["components"]["country"];
+            cityHTML(currentCity, currentCountry);
+            changeBackground(currentCity);
+            showTemperature(currentCity);
+        })
+    }
+    getLocation();
+})
 
 // Executions after click or enter
-// document.querySelector("#run").addEventListener("click", function() {
-//     cityHTML(currentCity.value);
-//     changeBackground(currentCity.value);
-//     showTemperature(currentCity.value);
-// }) 
-    cityHTML("Paris");
-    changeBackground("Paris");
-    showTemperature("Paris");
+document.querySelector("#run").addEventListener("click", function() {
+    cityHTML(currentCity.value);
+    changeBackground(currentCity.value);
+    showTemperature(currentCity.value);
+}) 
 
 
