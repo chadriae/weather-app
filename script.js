@@ -7,7 +7,7 @@ const cityLocation = document.querySelector(".location");
 const cityTemperatureDayZero = document.querySelector("#temperatureDayZero");
 const cityCoordinates = document.querySelector(".coordinates");
 
-const timeNow = document.querySelector(".timeNow");
+const timeNow = document.querySelector("#timeNow");
 
 const daysCount = 5;
 let date = new Date();

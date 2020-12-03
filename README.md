@@ -34,6 +34,6 @@ There are a couple of new concepts that are added to this exercise that haven't 
 
 - The big new feature is the use of api's. I used the [Weatherbit](https://www.weatherbit.io/)-api to retrieve the weather data
 - When visiting the page, you are being asked to allow to give your location (by Geolocation). By accepting this you will get the weather forecast of your location.
-- In stead of using static images given by the api, I used animated images I retrieved from LottieFiles.
+- In stead of using static images given by the api, I used animated images I retrieved from LottieFiles. I had to use the switch function for different scenarios.
 
 Take a look [here](https://chadriae.github.io/weather-app/).

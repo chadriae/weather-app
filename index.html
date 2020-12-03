@@ -5,44 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script defer src="script.js"></script>
     <script defer src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script defer src="script.js"></script>
     <title>Weather App</title>
 </head>
 <body class="body">
     <div class="container rounded justify-self-center">
-        <div class="border-2 border-blue-200 rounded block sm:grid grid-cols-3 p-2 m-2">
+        <div class="border-2 border-blue-200 rounded block sm:grid grid-cols-3 p-2 m-2" id="dayZero">
             <div class="location text-6xl"></div>
             <div class="justify-self-center"><div id="imgTemp0"></div></div>
             <div class="text-center sm:text-right" id="date"></div>
             <div class="text-center sm:text-left text-4xl" id="temperatureDayZero"></div>            
             <div class="text-center text-2xl text-center" id="descrDayZero"></div>
-            <div class="text-center sm:text-right text-4xl timeNow"></div>
+            <div class="text-center sm:text-right text-4xl" id="timeNow"></div>
         </div>
-        <div class="js-weather-form">
+        <div class="js-weather-form" id="form">
             <input type="text" class="city p-2" name="city" id="autocomplete" placeholder="Enter Location 🔍">
             <input class="bg-blue-400 p-2 rounded-full py-3 px-6 text-white" type="submit" value="Get forecast" id="run">
         </div>
         <div class="block sm:grid grid-cols-4 pt-4 gap-2 text-xl">
-            <div class="border-2 border-blue-200 rounded p-2 place-self-center">
+            <div class="border-2 border-blue-200 rounded p-2 place-self-center" id="dayOne">
                 <div id="weekDayOne"></div>
                 <div id="imgDayOne"></div>
                 <div id="temperatureDayOne"></div>
                 <div id="descrDayOne"></div>
             </div>
-            <div class="border-2 border-blue-200 rounded p-2 place-self-center">
+            <div class="border-2 border-blue-200 rounded p-2 place-self-center" id="dayTwo">
                 <div id="weekDayTwo"></div>
                 <div id="imgDayTwo"></div>
                 <div id="temperatureDayTwo"></div>
                 <div id="descrDayTwo"></div>
             </div>
-            <div class="border-2 border-blue-200 rounded p-2 place-self-center">
+            <div class="border-2 border-blue-200 rounded p-2 place-self-center" id="dayThree">
                 <div id="weekDayThree"></div>
                 <div id="imgDayThree"></div>
                 <div id="temperatureDayThree"></div>
                 <div id="descrDayThree"></div>
             </div>
-            <div class="border-2 border-blue-200 rounded p-2 place-self-center">
+            <div class="border-2 border-blue-200 rounded p-2 place-self-center" id="dayFour">
                 <div id="weekDayFour"></div>
                 <div id="imgDayFour"></div>
                 <div id="temperatureDayFour"></div>

@@ -23,8 +23,7 @@ body {
   padding: 10px;
   background-color: rgba(60, 98, 168, 0.664);
   min-width: 40vh;
-  max-width: 60vh;
-  min-height: 100%;
+  max-width: 70vh;
 }
 
 #run:hover {
@@ -41,15 +40,33 @@ body {
 
 @media only screen and (max-width: 600px) {
   .container {
-    max-width: 50%;
+    max-width: 30vh;
   }
   .location {
     text-align: center;
   }
-  .date {
+  #date {
     display: none;
   }
-  .timeNow {
+  #timeNow {
     display: none;
+  }
+  #dayZero,
+  #dayOne,
+  #dayTwo,
+  #dayThree,
+  #dayFour {
+    display: inline-block;
+    width: 20vh;
+  }
+  #imgTemp0,
+  #imgDayOne,
+  #imgDayTwo,
+  #imgDayThree,
+  #imgDayFour {
+    display: inline-block;
+  }
+  #form {
+    display: block;
   }
 }
