@@ -6,15 +6,17 @@
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
+    <script defer src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <title>Weather App</title>
 </head>
 <body class="body">
     <div class="container rounded text-center">
         <div class="grid grid-cols-3 p-2 gap-4">
-            <div class="location text-left text-7xl"></div>
-            <div class="imgTemp0 row-span-2"></div>
+            <div class="location text-left text-4xl"></div>
+            <div class="justify-self-center imgTemp0"></div>
             <div class="date text-right"></div>
-            <div class="text-left text-4xl" id="temperatureDayZero"></div>
+            <div class="text-left text-4xl" id="temperatureDayZero"></div>            
+            <div class="text-left text-2xl text-center" id="descrDayZero"></div>
             <div class="text-right text-4xl timeNow"></div>
         </div>
         <div class="js-weather-form">
@@ -22,21 +24,29 @@
             <input class="bg-blue-400 p-2 rounded-full py-3 px-6 text-white" type="submit" value="Get forecast" id="run">
         </div>
         <div class="grid grid-cols-4 pt-4 gap-4">
-            <div class="p-2 border rounded">
+            <div class="justify-self-center p-2">
                 <div id="weekDayOne"></div>
+                <div id="imgDayOne"></div>
                 <div id="temperatureDayOne"></div>
+                <div id="descrDayOne"></div>
             </div>
-            <div class="p-2 border rounded">
+            <div class="justify-self-center p-2">
                 <div id="weekDayTwo"></div>
+                <div id="imgDayTwo"></div>
                 <div id="temperatureDayTwo"></div>
+                <div id="descrDayTwo"></div>
             </div>
-            <div class="p-2 border rounded">
+            <div class="justify-self-center p-2">
                 <div id="weekDayThree"></div>
+                <div id="imgDayThree"></div>
                 <div id="temperatureDayThree"></div>
+                <div id="descrDayThree"></div>
             </div>
-            <div class="p-2 border rounded">
+            <div class="justify-self-center p-2">
                 <div id="weekDayFour"></div>
+                <div id="imgDayFour"></div>
                 <div id="temperatureDayFour"></div>
+                <div id="descrDayFour"></div>
             </div>
         </div>
     </div>  

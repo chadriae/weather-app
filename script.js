@@ -1,32 +1,20 @@
 // TODO show last searches form
 // TODO make responsive
 // TODO better fonts
-// TODO animation
 // TODO line graph chart.js
 // TODO live clock
 // TODO Readme
 
 const currentCity = document.querySelector(".city");
 const cityLocation = document.querySelector(".location");
-const cityImgTemp0 = document.querySelector(".imgTemp0");
 const cityTemperatureDayZero = document.querySelector("#temperatureDayZero");
-const temperatureDayOne = document.querySelector("#temperatureDayOne");
-const temperatureDayTwo = document.querySelector("#temperatureDayTwo");
-const temperatureDayThree = document.querySelector("#temperatureDayThree");
-const temperatureDayFour = document.querySelector("#temperatureDayFour");
-const weekDayOne = document.querySelector("#weekDayOne");
-const weekDayTwo = document.querySelector("#weekDayTwo");
-const weekDayThree = document.querySelector("#weekDayThree");
-const weekDayFour = document.querySelector("#weekDayFour");
 const cityCoordinates = document.querySelector(".coordinates");
-const imgTemp0 = document.querySelector("#temp0");
-const imgTemp1 = document.querySelector("#temp1");
-const imgTemp2 = document.querySelector("#temp2");
-const imgTemp3 = document.querySelector("#temp3");
-const imgTemp4 = document.querySelector("#temp4");
+
 const timeNow = document.querySelector(".timeNow");
 
 const daysCount = 5;
+const date = new Date();
+
 
 // Use enter key for submitting
 currentCity.addEventListener("keyup", function (event){
@@ -37,16 +25,17 @@ currentCity.addEventListener("keyup", function (event){
 })
 
 // Show the date
-const date = new Date();
-const dateDay = date.getDate();
-const dateMonth = (date.getMonth() + 1);
-const dateYear = date.getFullYear();
-let weekDay = (date.getDay());
-const dayWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-
 showdate = () => {
-    console.log(weekDay);
+    const weekDayOne = document.querySelector("#weekDayOne");
+    const weekDayTwo = document.querySelector("#weekDayTwo");
+    const weekDayThree = document.querySelector("#weekDayThree");
+    const weekDayFour = document.querySelector("#weekDayFour");
+    const dateDay = date.getDate();
+    const dateMonth = (date.getMonth() + 1);
+    const dateYear = date.getFullYear();
+    let weekDay = (date.getDay());
+    const dayWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     document.querySelector(".date").innerHTML = `${dayWeek[weekDay - 1]}<br>${months[dateMonth - 1]} ${dateDay}<br>${dateYear}`
     weekDayOne.innerHTML = `${dayWeek[weekDay % 6]}`;
     weekDayTwo.innerHTML = `${dayWeek[(weekDay + 1) % 6]}`;
@@ -77,35 +66,98 @@ cityHTML = (currentCity) => {
     })
 }
 
+// Animations
+addAnimation = (weather, index) => {
+    const imgTemp0 = document.querySelector(".imgTemp0");
+    const imgTemp1 = document.querySelector("#imgDayOne");
+    const imgTemp2 = document.querySelector("#imgDayTwo");
+    const imgTemp3 = document.querySelector("#imgDayThree");
+    const imgTemp4 = document.querySelector("#imgDayFour");
+    const imgTemp = [imgTemp0, imgTemp1, imgTemp2, imgTemp3, imgTemp4];
+
+    switch (weather) {
+    case "clouds":
+        imgTemp[index].innerHTML = `<lottie-player src="https://assets1.lottiefiles.com/packages/lf20_KUFdS6.json"  background="transparent"  speed="1"  style="width: 120px; height: 120px;"  loop  autoplay></lottie-player>`;
+        break;
+    case "rain":
+        imgTemp[index].innerHTML = `<lottie-player src="https://assets6.lottiefiles.com/private_files/lf30_9s6k5U.json"  background="transparent"  speed="1"  style="width: 120px; height: 120px;"  loop  autoplay></lottie-player>`;
+        break;
+    case "sun":
+        imgTemp[index].innerHTML = `<lottie-player src="https://assets4.lottiefiles.com/private_files/lf30_Um0Z9o.json"  background="transparent"  speed="1"  style="width: 120px; height: 120px;"  loop  autoplay></lottie-player>`;
+        break;
+    case "storm":
+        imgTemp[index].innerHTML = `<lottie-player src="https://assets6.lottiefiles.com/private_files/lf30_LPtaP2.json"  background="transparent"  speed="1"  style="width: 120px; height: 120px;"  loop  autoplay></lottie-player>`;
+        break;
+    case "snow":
+        imgTemp[index].innerHTML = `<lottie-player src="https://assets6.lottiefiles.com/private_files/lf30_kZXVCH.json"  background="transparent"  speed="1"  style="width: 120px; height: 120px;"  loop  autoplay></lottie-player>`;
+        break;
+    }
+}
+
+
+
 // Function to show temperature according to city
 showTemperature = (currentCity) => {
     fetch (`https://api.weatherbit.io/v2.0/forecast/daily?city=${currentCity}&key=cbe1db44a04a412ebe4a95a03cba00cd&days=${daysCount}`)
     .then(response => response.json())
     .then(data => {
         console.log(data);
+        const descrDayZero = document.querySelector("#descrDayZero");
+        const descrDayOne = document.querySelector("#descrDayOne");
+        const descrDayTwo = document.querySelector("#descrDayTwo");
+        const descrDayThree = document.querySelector("#descrDayThree");
+        const descrDayFour = document.querySelector("#descrDayFour");
+        const temperatureDayOne = document.querySelector("#temperatureDayOne");
+        const temperatureDayTwo = document.querySelector("#temperatureDayTwo");
+        const temperatureDayThree = document.querySelector("#temperatureDayThree");
+        const temperatureDayFour = document.querySelector("#temperatureDayFour");
         let tempDayZero = data["data"]["0"]["temp"];
         let tempDayOne = data["data"]["1"]["temp"];
         let tempDayTwo = data["data"]["2"]["temp"];
         let tempDayThree = data["data"]["3"]["temp"];
         let tempDayFour = data["data"]["4"]["temp"];
-        let img0Src = data["data"]["0"]["weather"]["icon"];
-        let img1Src = data["data"]["1"]["weather"]["icon"];
-        let img2Src = data["data"]["2"]["weather"]["icon"];
-        let img3Src = data["data"]["3"]["weather"]["icon"];
-        let img4Src = data["data"]["4"]["weather"]["icon"];
         let descr0 = data["data"]["0"]["weather"]["description"];
         let descr1 = data["data"]["1"]["weather"]["description"];
         let descr2 = data["data"]["2"]["weather"]["description"];
         let descr3 = data["data"]["3"]["weather"]["description"];
         let descr4 = data["data"]["4"]["weather"]["description"];
-        cityImgTemp0.innerHTML = `<img src="https://www.weatherbit.io/static/img/icons/${img0Src}.png">${descr0}`;
+        const descriptions = [descr0, descr1, descr2, descr3, descr4];
+
         temperatureDayZero.innerHTML = `${tempDayZero}°C`;
-        temperatureDayOne.innerHTML = `${tempDayOne}°C <img src="https://www.weatherbit.io/static/img/icons/${img1Src}.png">${descr1}`;
-        temperatureDayTwo.innerHTML = `${tempDayTwo}°C <img src="https://www.weatherbit.io/static/img/icons/${img2Src}.png">${descr2}`;
-        temperatureDayThree.innerHTML = `${tempDayThree}°C <img src="https://www.weatherbit.io/static/img/icons/${img3Src}.png">${descr3}`;
-        temperatureDayFour.innerHTML = `${tempDayFour}°C <img src="https://www.weatherbit.io/static/img/icons/${img4Src}.png">${descr4}`;
+        temperatureDayOne.innerHTML = `${tempDayOne}°C`;
+        temperatureDayTwo.innerHTML = `${tempDayTwo}°C`;
+        temperatureDayThree.innerHTML = `${tempDayThree}°C`;
+        temperatureDayFour.innerHTML = `${tempDayFour}°C`;
+        descrDayZero.innerHTML = `${descr0}`;
+        descrDayOne.innerHTML = `${descr1}`;
+        descrDayTwo.innerHTML = `${descr2}`;
+        descrDayThree.innerHTML = `${descr3}`;
+        descrDayFour.innerHTML = `${descr4}`;
+
+        descriptions.forEach(function(element, index) {
+            if (element.includes("sun")){
+                addAnimation("sun", index);
+            }
+            if (element.includes("Clear Sky")){
+                addAnimation("sun", index);
+            }
+            if (element.includes("rain")){
+                addAnimation("rain", index);
+            }
+            if (element.includes("drizzle")){
+                addAnimation("rain", index);
+            }
+            if (element.includes("clouds")){
+                addAnimation("clouds", index);
+            }
+            if (element.includes("storm")){
+                addAnimation("storm", index);
+            }
+            if (element.includes("snow")){
+                addAnimation("snow", index);
+            }
+        });
     })
-    .catch(err => alert("Wrong city name."))
 }
 
 // Executions for location of user

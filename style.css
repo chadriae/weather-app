@@ -15,12 +15,13 @@ body {
   font-family: "Poppins", sans-serif;
   background-color: rgba(255, 255, 255, 0.2);
   background-blend-mode: lighten;
+  color: white;
 }
 
 .container {
   text-align: center;
   padding: 10px;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(60, 98, 168, 0.664);
   min-width: 40vh;
   max-width: 80vh;
   min-height: 100%;
@@ -33,4 +34,8 @@ img {
 
 #run:hover {
   cursor: pointer;
+}
+
+.city {
+  color: black;
 }
