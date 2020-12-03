@@ -1,11 +1,8 @@
-// TODO show last searches form
 // TODO make responsive
 // TODO better fonts
 // TODO line graph chart.js
-// TODO live clock
-// TODO Readme
 
-const currentCity = document.querySelector(".city");
+const currentCity = document.querySelector("#autocomplete");
 const cityLocation = document.querySelector(".location");
 const cityTemperatureDayZero = document.querySelector("#temperatureDayZero");
 const cityCoordinates = document.querySelector(".coordinates");
@@ -13,8 +10,7 @@ const cityCoordinates = document.querySelector(".coordinates");
 const timeNow = document.querySelector(".timeNow");
 
 const daysCount = 5;
-const date = new Date();
-
+let date = new Date();
 
 // Use enter key for submitting
 currentCity.addEventListener("keyup", function (event){
@@ -36,7 +32,7 @@ showdate = () => {
     let weekDay = (date.getDay());
     const dayWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    document.querySelector(".date").innerHTML = `${dayWeek[weekDay - 1]}<br>${months[dateMonth - 1]} ${dateDay}<br>${dateYear}`
+    document.querySelector("#date").innerHTML = `${dayWeek[weekDay - 1]}<br>${months[dateMonth - 1]} ${dateDay}<br>${dateYear}`
     weekDayOne.innerHTML = `${dayWeek[weekDay % 6]}`;
     weekDayTwo.innerHTML = `${dayWeek[(weekDay + 1) % 6]}`;
     weekDayThree.innerHTML = `${dayWeek[(weekDay + 2) % 6]}`;
@@ -45,10 +41,19 @@ showdate = () => {
 
 // Live clock
 displayClock = () => {
-    let display = date.toLocaleTimeString();
-    timeNow.innerHTML = display;
-    setTimeout(displayClock, 1000); 
+    timeClock = (standIn) => {
+        if (standIn < 10) {
+          standIn = '0' + standIn
+        }
+        return standIn;
+    }
+    
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    timeNow.innerHTML = timeClock(hours) + ":" + timeClock(minutes) + ":" + timeClock(seconds);
 }
+setInterval(displayClock, 1000);
 
 // Function to change HTML with current city
 cityHTML = (currentCity) => {
@@ -68,7 +73,7 @@ cityHTML = (currentCity) => {
 
 // Animations
 addAnimation = (weather, index) => {
-    const imgTemp0 = document.querySelector(".imgTemp0");
+    const imgTemp0 = document.querySelector("#imgTemp0");
     const imgTemp1 = document.querySelector("#imgDayOne");
     const imgTemp2 = document.querySelector("#imgDayTwo");
     const imgTemp3 = document.querySelector("#imgDayThree");
@@ -93,8 +98,6 @@ addAnimation = (weather, index) => {
         break;
     }
 }
-
-
 
 // Function to show temperature according to city
 showTemperature = (currentCity) => {

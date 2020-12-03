@@ -23,13 +23,8 @@ body {
   padding: 10px;
   background-color: rgba(60, 98, 168, 0.664);
   min-width: 40vh;
-  max-width: 80vh;
+  max-width: 60vh;
   min-height: 100%;
-}
-
-img {
-  display: block;
-  margin: 0 auto;
 }
 
 #run:hover {
@@ -38,4 +33,23 @@ img {
 
 .city {
   color: black;
+}
+
+.location {
+  text-align: left;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    max-width: 50%;
+  }
+  .location {
+    text-align: center;
+  }
+  .date {
+    display: none;
+  }
+  .timeNow {
+    display: none;
+  }
 }
