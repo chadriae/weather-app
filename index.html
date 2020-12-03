@@ -9,7 +9,7 @@
     <title>Weather App</title>
 </head>
 <body class="body">
-    <div class="container text-center">
+    <div class="container rounded text-center">
         <div class="grid grid-cols-3 p-2 gap-4">
             <div class="location text-left text-7xl"></div>
             <div class="imgTemp0 row-span-2"></div>
@@ -22,10 +22,22 @@
             <input class="bg-blue-400 p-2 rounded-full py-3 px-6 text-white" type="submit" value="Get forecast" id="run">
         </div>
         <div class="grid grid-cols-4 pt-4 gap-4">
-            <div id="temperatureDayOne" class="p-2 border rounded"></div>
-            <div id="temperatureDayTwo" class="p-2 border rounded"></div>
-            <div id="temperatureDayThree" class="p-2 border rounded"></div>
-            <div id="temperatureDayFour" class="p-2 border rounded"></div>
+            <div class="p-2 border rounded">
+                <div id="weekDayOne"></div>
+                <div id="temperatureDayOne"></div>
+            </div>
+            <div class="p-2 border rounded">
+                <div id="weekDayTwo"></div>
+                <div id="temperatureDayTwo"></div>
+            </div>
+            <div class="p-2 border rounded">
+                <div id="weekDayThree"></div>
+                <div id="temperatureDayThree"></div>
+            </div>
+            <div class="p-2 border rounded">
+                <div id="weekDayFour"></div>
+                <div id="temperatureDayFour"></div>
+            </div>
         </div>
     </div>  
 </body>

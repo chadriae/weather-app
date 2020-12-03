@@ -4,15 +4,20 @@
 // TODO animation
 // TODO line graph chart.js
 // TODO live clock
+// TODO Readme
 
 const currentCity = document.querySelector(".city");
 const cityLocation = document.querySelector(".location");
 const cityImgTemp0 = document.querySelector(".imgTemp0");
 const cityTemperatureDayZero = document.querySelector("#temperatureDayZero");
-const cityTemperatureDayOne = document.querySelector("#temperatureDayOne");
-const cityTemperatureDayTwo = document.querySelector("#temperatureDayTwo");
-const cityTemperatureDayThree = document.querySelector("#temperatureDayThree");
-const cityTemperatureDayFour = document.querySelector("#temperatureDayFour");
+const temperatureDayOne = document.querySelector("#temperatureDayOne");
+const temperatureDayTwo = document.querySelector("#temperatureDayTwo");
+const temperatureDayThree = document.querySelector("#temperatureDayThree");
+const temperatureDayFour = document.querySelector("#temperatureDayFour");
+const weekDayOne = document.querySelector("#weekDayOne");
+const weekDayTwo = document.querySelector("#weekDayTwo");
+const weekDayThree = document.querySelector("#weekDayThree");
+const weekDayFour = document.querySelector("#weekDayFour");
 const cityCoordinates = document.querySelector(".coordinates");
 const imgTemp0 = document.querySelector("#temp0");
 const imgTemp1 = document.querySelector("#temp1");
@@ -36,10 +41,18 @@ const date = new Date();
 const dateDay = date.getDate();
 const dateMonth = (date.getMonth() + 1);
 const dateYear = date.getFullYear();
-const weekDay = date.getDay();
+let weekDay = (date.getDay());
 const dayWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-document.querySelector(".date").innerHTML = `${dayWeek[weekDay - 1]}<br>${months[dateMonth - 1]} ${dateDay}<br>${dateYear}`
+
+showdate = () => {
+    console.log(weekDay);
+    document.querySelector(".date").innerHTML = `${dayWeek[weekDay - 1]}<br>${months[dateMonth - 1]} ${dateDay}<br>${dateYear}`
+    weekDayOne.innerHTML = `${dayWeek[weekDay % 6]}`;
+    weekDayTwo.innerHTML = `${dayWeek[(weekDay + 1) % 6]}`;
+    weekDayThree.innerHTML = `${dayWeek[(weekDay + 2) % 6]}`;
+    weekDayFour.innerHTML = `${dayWeek[(weekDay + 3) % 6]}`;
+}
 
 // Live clock
 displayClock = () => {
@@ -59,7 +72,7 @@ cityHTML = (currentCity) => {
     .then(response => response.json())
     .then(data => {
         let randomNumber = Math.floor(Math.random() * 5);
-        let imgUrl = data["results"][randomNumber]["urls"]["full"]
+        let imgUrl = data["results"][randomNumber]["urls"]["full"];
         document.body.style.backgroundImage = `url(${imgUrl})`;
     })
 }
@@ -86,16 +99,11 @@ showTemperature = (currentCity) => {
         let descr3 = data["data"]["3"]["weather"]["description"];
         let descr4 = data["data"]["4"]["weather"]["description"];
         cityImgTemp0.innerHTML = `<img src="https://www.weatherbit.io/static/img/icons/${img0Src}.png">${descr0}`;
-        cityTemperatureDayZero.innerHTML = `${tempDayZero}°C`;
-        cityTemperatureDayOne.innerHTML = `Tomorrow<br>${tempDayOne}°C <img src="https://www.weatherbit.io/static/img/icons/${img1Src}.png">${descr1}`;
-        cityTemperatureDayTwo.innerHTML = `${dayWeek[weekDay + 1]}<br>${tempDayTwo}°C <img src="https://www.weatherbit.io/static/img/icons/${img2Src}.png">${descr2}`;
-        cityTemperatureDayThree.innerHTML = `${dayWeek[weekDay + 2]}<br>${tempDayThree}°C <img src="https://www.weatherbit.io/static/img/icons/${img3Src}.png">${descr3}`;
-        cityTemperatureDayFour.innerHTML = `${dayWeek[weekDay + 3]}<br>${tempDayFour}°C <img src="https://www.weatherbit.io/static/img/icons/${img4Src}.png">${descr4}`;
-        // imgTemp0.src = "https://www.weatherbit.io/static/img/icons/c02d.png";
-        // imgTemp1.src = "https://www.weatherbit.io/static/img/icons/c02d.png";
-        // imgTemp2.src = "https://www.weatherbit.io/static/img/icons/c02d.png";
-        // imgTemp3.src = "https://www.weatherbit.io/static/img/icons/c02d.png";
-        // imgTemp4.src = "https://www.weatherbit.io/static/img/icons/c02d.png";
+        temperatureDayZero.innerHTML = `${tempDayZero}°C`;
+        temperatureDayOne.innerHTML = `${tempDayOne}°C <img src="https://www.weatherbit.io/static/img/icons/${img1Src}.png">${descr1}`;
+        temperatureDayTwo.innerHTML = `${tempDayTwo}°C <img src="https://www.weatherbit.io/static/img/icons/${img2Src}.png">${descr2}`;
+        temperatureDayThree.innerHTML = `${tempDayThree}°C <img src="https://www.weatherbit.io/static/img/icons/${img3Src}.png">${descr3}`;
+        temperatureDayFour.innerHTML = `${tempDayFour}°C <img src="https://www.weatherbit.io/static/img/icons/${img4Src}.png">${descr4}`;
     })
     .catch(err => alert("Wrong city name."))
 }
@@ -124,6 +132,7 @@ window.addEventListener("load", function() {
     }
     getLocation();
     displayClock();
+    showdate();
 })
 
 // Executions after click or enter
@@ -132,4 +141,6 @@ document.querySelector("#run").addEventListener("click", function() {
     changeBackground(currentCity.value);
     showTemperature(currentCity.value);
     displayClock();
+    showdate();
+    showTemperature(currentCity);
 }) 
