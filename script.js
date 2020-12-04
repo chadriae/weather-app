@@ -1,6 +1,5 @@
-// TODO make responsive
-// TODO better fonts
 // TODO line graph chart.js
+// TODO show last 5 searches
 
 const currentCity = document.querySelector("#autocomplete");
 const cityLocation = document.querySelector(".location");
@@ -41,6 +40,8 @@ showdate = () => {
 
 // Live clock
 displayClock = () => {
+    let time = new Date();
+
     timeClock = (standIn) => {
         if (standIn < 10) {
           standIn = '0' + standIn
@@ -48,9 +49,9 @@ displayClock = () => {
         return standIn;
     }
     
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var seconds = date.getSeconds();
+    let hours = time.getHours();
+    let minutes = time.getMinutes();
+    let seconds = time.getSeconds();
     timeNow.innerHTML = timeClock(hours) + ":" + timeClock(minutes) + ":" + timeClock(seconds);
 }
 setInterval(displayClock, 1000);
