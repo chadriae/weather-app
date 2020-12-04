@@ -5,9 +5,7 @@ const currentCity = document.querySelector("#autocomplete");
 const cityLocation = document.querySelector(".location");
 const cityTemperatureDayZero = document.querySelector("#temperatureDayZero");
 const cityCoordinates = document.querySelector(".coordinates");
-
 const timeNow = document.querySelector("#timeNow");
-
 const daysCount = 5;
 let date = new Date();
 
@@ -105,7 +103,6 @@ showTemperature = (currentCity) => {
     .then(data => {
         let tempDayZero = data["data"]["0"]["temp"];
         temperatureDayZero.innerHTML = `${tempDayZero}°C`;
-
         const descriptions = [];
         for (i = 0; i < daysCount; i ++) {
             let j;
@@ -116,7 +113,6 @@ showTemperature = (currentCity) => {
         for (i = 0; i < daysCount; i++) {
             descriptionDaysHtml[i].innerHTML = descriptions[i];
         }
-
         const minTemps = [];
         for (i = 0; i < daysCount; i ++) {
             let j;
@@ -133,7 +129,6 @@ showTemperature = (currentCity) => {
         for (i = 0; i < minMaxTempsHtml.length; i++) {
             minMaxTempsHtml[i].innerHTML = `min ${minTemps[i]}°C<br>max ${maxTemps[i]}°C`;
         }
-
         descriptions.forEach(function(element, index) {
             if (element.includes("sun")){
                 addAnimation("sun", index);
@@ -169,7 +164,6 @@ window.addEventListener("load", function() {
             cityCoordinates.innerHTML = "Geolocation is not supported by this browser.";
         }
     }
-
     showPosition = (position) => {
         // Show place name based on coordinates
         fetch (`https://api.opencagedata.com/geocode/v1/json?q=${position.coords.latitude}+${position.coords.longitude}&key=0dc9b14ba9a846f19428714fed4f54cc`)
