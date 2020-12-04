@@ -45,8 +45,11 @@ body {
   .container {
     max-width: 30vh;
   }
-  .location {
+  .location,
+  #temperatureDayZero,
+  #descrDayZero {
     text-align: center;
+    font-size: x-large;
   }
   #date {
     display: none;

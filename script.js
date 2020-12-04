@@ -21,10 +21,6 @@ currentCity.addEventListener("keyup", function (event){
 
 // Show the date
 showdate = () => {
-    const weekDayOne = document.querySelector("#weekDayOne");
-    const weekDayTwo = document.querySelector("#weekDayTwo");
-    const weekDayThree = document.querySelector("#weekDayThree");
-    const weekDayFour = document.querySelector("#weekDayFour");
     const dateDay = date.getDate();
     const dateMonth = (date.getMonth() + 1);
     const dateYear = date.getFullYear();
@@ -32,10 +28,12 @@ showdate = () => {
     const dayWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     document.querySelector("#date").innerHTML = `${dayWeek[weekDay - 1]}<br>${months[dateMonth - 1]} ${dateDay}<br>${dateYear}`
-    weekDayOne.innerHTML = `${dayWeek[weekDay % 6]}`;
-    weekDayTwo.innerHTML = `${dayWeek[(weekDay + 1) % 6]}`;
-    weekDayThree.innerHTML = `${dayWeek[(weekDay + 2) % 6]}`;
-    weekDayFour.innerHTML = `${dayWeek[(weekDay + 3) % 6]}`;
+
+    const weekDays = [document.querySelector("#weekDayOne"), document.querySelector("#weekDayTwo"), document.querySelector("#weekDayThree"), document.querySelector("#weekDayFour")];
+    for (i = 0; i < daysCount; i++) {
+        let j = (weekDay + i) % 7;
+        weekDays[i].innerHTML = `${dayWeek[j]}`;
+    }
 }
 
 // Live clock
@@ -105,38 +103,36 @@ showTemperature = (currentCity) => {
     fetch (`https://api.weatherbit.io/v2.0/forecast/daily?city=${currentCity}&key=cbe1db44a04a412ebe4a95a03cba00cd&days=${daysCount}`)
     .then(response => response.json())
     .then(data => {
-        console.log(data);
-        const descrDayZero = document.querySelector("#descrDayZero");
-        const descrDayOne = document.querySelector("#descrDayOne");
-        const descrDayTwo = document.querySelector("#descrDayTwo");
-        const descrDayThree = document.querySelector("#descrDayThree");
-        const descrDayFour = document.querySelector("#descrDayFour");
-        const temperatureDayOne = document.querySelector("#temperatureDayOne");
-        const temperatureDayTwo = document.querySelector("#temperatureDayTwo");
-        const temperatureDayThree = document.querySelector("#temperatureDayThree");
-        const temperatureDayFour = document.querySelector("#temperatureDayFour");
         let tempDayZero = data["data"]["0"]["temp"];
-        let tempDayOne = data["data"]["1"]["temp"];
-        let tempDayTwo = data["data"]["2"]["temp"];
-        let tempDayThree = data["data"]["3"]["temp"];
-        let tempDayFour = data["data"]["4"]["temp"];
-        let descr0 = data["data"]["0"]["weather"]["description"];
-        let descr1 = data["data"]["1"]["weather"]["description"];
-        let descr2 = data["data"]["2"]["weather"]["description"];
-        let descr3 = data["data"]["3"]["weather"]["description"];
-        let descr4 = data["data"]["4"]["weather"]["description"];
-        const descriptions = [descr0, descr1, descr2, descr3, descr4];
-
         temperatureDayZero.innerHTML = `${tempDayZero}°C`;
-        temperatureDayOne.innerHTML = `${tempDayOne}°C`;
-        temperatureDayTwo.innerHTML = `${tempDayTwo}°C`;
-        temperatureDayThree.innerHTML = `${tempDayThree}°C`;
-        temperatureDayFour.innerHTML = `${tempDayFour}°C`;
-        descrDayZero.innerHTML = `${descr0}`;
-        descrDayOne.innerHTML = `${descr1}`;
-        descrDayTwo.innerHTML = `${descr2}`;
-        descrDayThree.innerHTML = `${descr3}`;
-        descrDayFour.innerHTML = `${descr4}`;
+
+        const descriptions = [];
+        for (i = 0; i < daysCount; i ++) {
+            let j;
+            j = data["data"][i]["weather"]["description"];
+            descriptions.push(j);
+        }
+        const descriptionDaysHtml = [document.querySelector("#descrDayZero"), document.querySelector("#descrDayOne"), document.querySelector("#descrDayTwo"), document.querySelector("#descrDayThree"), document.querySelector("#descrDayFour")];
+        for (i = 0; i < daysCount; i++) {
+            descriptionDaysHtml[i].innerHTML = descriptions[i];
+        }
+
+        const minTemps = [];
+        for (i = 0; i < daysCount; i ++) {
+            let j;
+            j = data["data"][i]["min_temp"];
+            minTemps.push(j);
+        }
+        const maxTemps = [];
+        for (i = 0; i < daysCount; i ++) {
+            let j;
+            j = data["data"][i]["max_temp"];
+            maxTemps.push(j);
+        }
+        const minMaxTempsHtml = [document.querySelector("#temperatureDayOne"), document.querySelector("#temperatureDayTwo"), document.querySelector("#temperatureDayThree"), document.querySelector("#temperatureDayFour")];
+        for (i = 0; i < minMaxTempsHtml.length; i++) {
+            minMaxTempsHtml[i].innerHTML = `min ${minTemps[i]}°C<br>max ${maxTemps[i]}°C`;
+        }
 
         descriptions.forEach(function(element, index) {
             if (element.includes("sun")){

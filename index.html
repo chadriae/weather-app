@@ -6,6 +6,7 @@
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script defer src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
     <script defer src="script.js"></script>
     <title>Weather App</title>
 </head>
@@ -23,7 +24,7 @@
             <input type="text" class="city p-2" name="city" id="autocomplete" placeholder="Enter Location 🔍">
             <input class="bg-blue-400 p-2 rounded-full py-3 px-6 text-white" type="submit" value="Get forecast" id="run">
         </div>
-        <div class="block sm:grid grid-cols-4 pt-4 gap-2 text-xl">
+        <div class="block sm:grid grid-cols-4 pt-4 gap-2 text-xl mb-2">
             <div class="border-2 border-blue-200 rounded p-2 place-self-center" id="dayOne">
                 <div id="weekDayOne"></div>
                 <div id="imgDayOne"></div>
@@ -49,6 +50,7 @@
                 <div id="descrDayFour"></div>
             </div>
         </div>
+        <!-- <canvas id="myChart" width="50px" height="50px"></canvas> -->
     </div>  
 </body>
 </html>
