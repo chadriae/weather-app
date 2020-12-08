@@ -10,7 +10,7 @@ const daysCount = 5;
 let date = new Date();
 
 // Use enter key for submitting
-currentCity.addEventListener("keyup", function (event){
+currentCity.addEventListener("keyup", (event) => {
     if (event.key == "Enter") {
         event.preventDefault();
         document.querySelector("#run").click();
@@ -38,7 +38,7 @@ showdate = () => {
 displayClock = () => {
     let time = new Date();
 
-    timeClock = (standIn) => {
+    timeClock = standIn => {
         if (standIn < 10) {
           standIn = '0' + standIn
         }
@@ -53,12 +53,12 @@ displayClock = () => {
 setInterval(displayClock, 1000);
 
 // Function to change HTML with current city
-cityHTML = (currentCity) => {
+cityHTML = currentCity => {
         cityLocation.innerHTML = `${currentCity}`;
 }
 
 // Function to change background according to city
- changeBackground = (currentCity) => {
+ changeBackground = currentCity => {
     fetch (`https://api.unsplash.com/search/photos/?query=${currentCity}&client_id=00WYi-JstJlyoIEg8SJDxYOS-9RB4Hr7_yfu5gpIO2g`)
     .then(response => response.json())
     .then(data => {
@@ -103,7 +103,7 @@ addAnimation = (weather, index) => {
 }
 
 // Function to show temperature according to city
-showTemperature = (currentCity) => {
+showTemperature = currentCity => {
     fetch (`https://api.weatherbit.io/v2.0/forecast/daily?city=${currentCity}&key=cbe1db44a04a412ebe4a95a03cba00cd&days=${daysCount}`)
     .then(response => response.json())
     .then(data => {
@@ -135,7 +135,7 @@ showTemperature = (currentCity) => {
         for (i = 0; i < minMaxTempsHtml.length; i++) {
             minMaxTempsHtml[i].innerHTML = `min ${minTemps[i]}°C<br>max ${maxTemps[i]}°C`;
         }
-        descriptions.forEach(function(element, index) {
+        descriptions.forEach((element, index) => {
             if (element.includes("sun")){
                 addAnimation("sun", index);
             }
@@ -162,7 +162,7 @@ showTemperature = (currentCity) => {
 }
 
 // Executions for location of user
-window.addEventListener("load", function() {
+window.addEventListener("load", () => {
     getLocation = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);
@@ -170,7 +170,7 @@ window.addEventListener("load", function() {
             cityCoordinates.innerHTML = "Geolocation is not supported by this browser.";
         }
     }
-    showPosition = (position) => {
+    showPosition = position => {
         // Show place name based on coordinates
         fetch (`https://api.opencagedata.com/geocode/v1/json?q=${position.coords.latitude}+${position.coords.longitude}&key=0dc9b14ba9a846f19428714fed4f54cc`)
             .then(response => response.json())
