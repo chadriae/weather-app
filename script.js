@@ -32,7 +32,7 @@ showdate = () => {
         let j = (weekDay + i) % 7;
         weekDays[i].innerHTML = `${dayWeek[j]}`;
     }
-}
+};
 
 // Live clock
 displayClock = () => {
@@ -76,22 +76,28 @@ addAnimation = (weather, index) => {
     const imgTemp3 = document.querySelector("#imgDayThree");
     const imgTemp4 = document.querySelector("#imgDayFour");
     const imgTemp = [imgTemp0, imgTemp1, imgTemp2, imgTemp3, imgTemp4];
+    const newContent = document.createElement("p");
 
     switch (weather) {
-    case "clouds":
-        imgTemp[index].innerHTML = `<lottie-player src="https://assets1.lottiefiles.com/packages/lf20_KUFdS6.json"  background="transparent"  speed="1"  style="width: 120px; height: 120px;"  loop  autoplay></lottie-player>`;
+        case "clouds":
+            newContent.innerHTML = `<lottie-player src="https://assets1.lottiefiles.com/packages/lf20_KUFdS6.json"  background="transparent"  speed="1"  style="width: 120px; height: 120px;"  loop  autoplay></lottie-player>`;
+            imgTemp[index].appendChild(newContent);
         break;
-    case "rain":
-        imgTemp[index].innerHTML = `<lottie-player src="https://assets6.lottiefiles.com/private_files/lf30_9s6k5U.json"  background="transparent"  speed="1"  style="width: 120px; height: 120px;"  loop  autoplay></lottie-player>`;
+        case "rain":
+            newContent.innerHTML = `<lottie-player src="https://assets6.lottiefiles.com/private_files/lf30_9s6k5U.json"  background="transparent"  speed="1"  style="width: 120px; height: 120px;"  loop  autoplay></lottie-player>`;
+            imgTemp[index].appendChild(newContent);
         break;
-    case "sun":
-        imgTemp[index].innerHTML = `<lottie-player src="https://assets4.lottiefiles.com/private_files/lf30_Um0Z9o.json"  background="transparent"  speed="1"  style="width: 120px; height: 120px;"  loop  autoplay></lottie-player>`;
+        case "sun":
+            newContent.innerHTML = `<lottie-player src="https://assets4.lottiefiles.com/private_files/lf30_Um0Z9o.json"  background="transparent"  speed="1"  style="width: 120px; height: 120px;"  loop  autoplay></lottie-player>`;
+            imgTemp[index].appendChild(newContent);
         break;
-    case "storm":
-        imgTemp[index].innerHTML = `<lottie-player src="https://assets6.lottiefiles.com/private_files/lf30_LPtaP2.json"  background="transparent"  speed="1"  style="width: 120px; height: 120px;"  loop  autoplay></lottie-player>`;
+        case "storm":
+            newContent.innerHTML = `<lottie-player src="https://assets6.lottiefiles.com/private_files/lf30_LPtaP2.json"  background="transparent"  speed="1"  style="width: 120px; height: 120px;"  loop  autoplay></lottie-player>`;
+            imgTemp[index].appendChild(newContent);
         break;
-    case "snow":
-        imgTemp[index].innerHTML = `<lottie-player src="https://assets6.lottiefiles.com/private_files/lf30_kZXVCH.json"  background="transparent"  speed="1"  style="width: 120px; height: 120px;"  loop  autoplay></lottie-player>`;
+        case "snow":
+            newContent.innerHTML = `<lottie-player src="https://assets6.lottiefiles.com/private_files/lf30_kZXVCH.json"  background="transparent"  speed="1"  style="width: 120px; height: 120px;"  loop  autoplay></lottie-player>`;
+            imgTemp[index].appendChild(newContent);
         break;
     }
 }
