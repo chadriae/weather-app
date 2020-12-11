@@ -29,7 +29,8 @@ body {
   height: auto;
 }
 
-#run:hover {
+#run:hover,
+#capital:hover {
   cursor: pointer;
 }
 
