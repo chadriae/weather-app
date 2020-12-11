@@ -9,6 +9,7 @@ const timeNow = document.querySelector("#timeNow");
 const daysCount = 5;
 let date = new Date();
 
+// Get weather forecast of a random capital city in the world
 document.querySelector("#capital").addEventListener("click", () =>{
     const url = "https://raw.githubusercontent.com/samayo/country-json/master/src/country-by-capital-city.json";
     fetch(url)
@@ -26,11 +27,9 @@ document.querySelector("#capital").addEventListener("click", () =>{
             changeBackground(randomCapital);
             showTemperature(randomCapital);
             displayClock();
-            showdate();
             showTemperature(randomCapital);
          })
 })
-
 
 // Use enter key for submitting
 currentCity.addEventListener("keyup", (event) => {
@@ -77,11 +76,11 @@ setInterval(displayClock, 1000);
 
 // Function to change HTML with current city
 cityHTML = (currentCity, currentCountry) => {
-    if (currentCountry !== null) {
+    if (currentCity != null){
         cityLocation.innerHTML = `${currentCity}, ${currentCountry}`;
     }
     else {
-        cityLocation.innerHTML = `${currentCity}`;
+        console.log(`${currentCity} is not a valid city.`)
     }
 }
 
