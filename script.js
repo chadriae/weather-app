@@ -9,6 +9,29 @@ const timeNow = document.querySelector("#timeNow");
 const daysCount = 5;
 let date = new Date();
 
+document.querySelector("#capital").addEventListener("click", () =>{
+    const url = "https://raw.githubusercontent.com/samayo/country-json/master/src/country-by-capital-city.json";
+    fetch(url)
+        .then((response) => {
+            if (!response.ok) {
+                throw Error(response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            let randomNumber = Math.floor(Math.random() * data.length);
+            let randomCountry = data[randomNumber]["country"];
+            let randomCapital = data[randomNumber]["city"];
+            cityHTML(randomCapital, randomCountry);
+            changeBackground(randomCapital);
+            showTemperature(randomCapital);
+            displayClock();
+            showdate();
+            showTemperature(randomCapital);
+         })
+})
+
+
 // Use enter key for submitting
 currentCity.addEventListener("keyup", (event) => {
     if (event.key == "Enter") {
@@ -53,8 +76,13 @@ displayClock = () => {
 setInterval(displayClock, 1000);
 
 // Function to change HTML with current city
-cityHTML = currentCity => {
+cityHTML = (currentCity, currentCountry) => {
+    if (currentCountry !== null) {
+        cityLocation.innerHTML = `${currentCity}, ${currentCountry}`;
+    }
+    else {
         cityLocation.innerHTML = `${currentCity}`;
+    }
 }
 
 // Function to change background according to city
@@ -76,29 +104,23 @@ addAnimation = (weather, index) => {
     const imgTemp3 = document.querySelector("#imgDayThree");
     const imgTemp4 = document.querySelector("#imgDayFour");
     const imgTemp = [imgTemp0, imgTemp1, imgTemp2, imgTemp3, imgTemp4];
-    const newContent = document.createElement("p");
-
+    
     switch (weather) {
         case "clouds":
-            newContent.innerHTML = `<lottie-player src="https://assets1.lottiefiles.com/packages/lf20_KUFdS6.json"  background="transparent"  speed="1"  style="width: 120px; height: 120px;"  loop  autoplay></lottie-player>`;
-            imgTemp[index].appendChild(newContent);
-        break;
+            imgTemp[index].innerHTML = `<lottie-player src="https://assets1.lottiefiles.com/packages/lf20_KUFdS6.json"  background="transparent"  speed="1"  style="width: 120px; height: 120px;"  loop  autoplay></lottie-player>`;
+            return;
         case "rain":
-            newContent.innerHTML = `<lottie-player src="https://assets6.lottiefiles.com/private_files/lf30_9s6k5U.json"  background="transparent"  speed="1"  style="width: 120px; height: 120px;"  loop  autoplay></lottie-player>`;
-            imgTemp[index].appendChild(newContent);
-        break;
+            imgTemp[index].innerHTML = `<lottie-player src="https://assets6.lottiefiles.com/private_files/lf30_9s6k5U.json"  background="transparent"  speed="1"  style="width: 120px; height: 120px;"  loop  autoplay></lottie-player>`;
+            return;
         case "sun":
-            newContent.innerHTML = `<lottie-player src="https://assets4.lottiefiles.com/private_files/lf30_Um0Z9o.json"  background="transparent"  speed="1"  style="width: 120px; height: 120px;"  loop  autoplay></lottie-player>`;
-            imgTemp[index].appendChild(newContent);
-        break;
+            imgTemp[index].innerHTML = `<lottie-player src="https://assets4.lottiefiles.com/private_files/lf30_Um0Z9o.json"  background="transparent"  speed="1"  style="width: 120px; height: 120px;"  loop  autoplay></lottie-player>`;
+            return;
         case "storm":
-            newContent.innerHTML = `<lottie-player src="https://assets6.lottiefiles.com/private_files/lf30_LPtaP2.json"  background="transparent"  speed="1"  style="width: 120px; height: 120px;"  loop  autoplay></lottie-player>`;
-            imgTemp[index].appendChild(newContent);
-        break;
+            imgTemp[index].innerHTML = `<lottie-player src="https://assets6.lottiefiles.com/private_files/lf30_LPtaP2.json"  background="transparent"  speed="1"  style="width: 120px; height: 120px;"  loop  autoplay></lottie-player>`;
+            return;
         case "snow":
-            newContent.innerHTML = `<lottie-player src="https://assets6.lottiefiles.com/private_files/lf30_kZXVCH.json"  background="transparent"  speed="1"  style="width: 120px; height: 120px;"  loop  autoplay></lottie-player>`;
-            imgTemp[index].appendChild(newContent);
-        break;
+            imgTemp[index].innerHTML = `<lottie-player src="https://assets6.lottiefiles.com/private_files/lf30_kZXVCH.json"  background="transparent"  speed="1"  style="width: 120px; height: 120px;"  loop  autoplay></lottie-player>`;
+            return;
     }
 }
 
